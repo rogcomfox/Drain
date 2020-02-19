@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_trash"
+        android:title="@string/list_sampah"/>
+    <item
+        android:id="@+id/nav_qr_code"
+        android:title="@string/qr_code_scanner"/>
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/pengaturan"/>
+    <item
+        android:id="@+id/nav_about"
+        android:title="@string/tentang_flow"/>
+</menu>

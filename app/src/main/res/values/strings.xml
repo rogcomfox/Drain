@@ -4,4 +4,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_sampah">List Sampah</string>
+    <string name="qr_code_scanner">Qr Code Scanner</string>
+    <string name="tentang_flow">Tentang Flow</string>
+    <string name="scan_lagi">Scan Lagi</string>
+    <string name="pengaturan">Pengaturan</string>
 </resources>
