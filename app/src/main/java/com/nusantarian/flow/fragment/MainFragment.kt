@@ -11,12 +11,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.GeoApiContext
 import com.nusantarian.flow.Constant.Companion.MAPVIEW_BUNDLE_KEY
 import com.nusantarian.flow.R
 
-class MainFragment : Fragment(), OnMapReadyCallback {
+class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var ft: FragmentTransaction
     private lateinit var mToolbar: Toolbar
@@ -33,14 +34,12 @@ class MainFragment : Fragment(), OnMapReadyCallback {
         mToolbar = view.findViewById(R.id.toolbar)
         mapView = view.findViewById(R.id.map_view)
         progressCircular = view.findViewById(R.id.progress_circular)
-
         (activity as AppCompatActivity).setSupportActionBar(mToolbar)
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.app_name)
 
         ft = activity!!.supportFragmentManager.beginTransaction()
 
-
-//        progressCircular.visibility(View.VISIBLE)
+        progressCircular.visibility = View.VISIBLE
         initGoogleMap(savedInstanceState)
         setHasOptionsMenu(true)
         return view
@@ -58,6 +57,7 @@ class MainFragment : Fragment(), OnMapReadyCallback {
                 .apiKey(getString(R.string.maps_api))
                 .build()
         }
+        progressCircular.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,7 +68,9 @@ class MainFragment : Fragment(), OnMapReadyCallback {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_trash -> {
-
+                ft.replace(R.id.frame_container, TrashListFragment())
+                    .addToBackStack(null)
+                    .commit()
             }
             R.id.nav_qr_code -> {
                 ft.replace(R.id.frame_container, QrScannerFragment())
@@ -83,8 +85,11 @@ class MainFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(map: GoogleMap?) {
-        map?.addMarker(MarkerOptions().position(LatLng(0.0, 0.0)).title("marker"))
+        val node1 = LatLng(-7.95708, 112.624627)
+        map?.addMarker(MarkerOptions().position(node1).title("Node 1"))
         map?.isMyLocationEnabled = true
+        map!!.uiSettings.isZoomControlsEnabled = true
+        map.setOnMarkerClickListener(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -126,5 +131,13 @@ class MainFragment : Fragment(), OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_container, DetailNodeFragment())
+            .addToBackStack(null)
+            .commit()
+        return true
     }
 }

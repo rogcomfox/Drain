@@ -18,6 +18,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.firebase.firestore.GeoPoint
 import com.nusantarian.flow.Constant.Companion.ERROR_DIALOG_REQUEST
 import com.nusantarian.flow.Constant.Companion.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
 import com.nusantarian.flow.Constant.Companion.PERMISSIONS_REQUEST_ENABLE_GPS
@@ -28,6 +31,7 @@ import com.nusantarian.flow.fragment.MainFragment
 class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener {
 
     private var mLocationPermissionGranted: Boolean = false
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +49,30 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
             getMainFragment()
         }
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         //listen for changes in back stack
         supportFragmentManager.addOnBackStackChangedListener(this)
+    }
+
+    private fun getLastKnownLocation() {
+        Log.d(TAG, "getLastKnownLocation: called")
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        mFusedLocationClient.lastLocation.addOnCompleteListener {
+            if (it.isSuccessful) {
+                val location = it.result
+                val geoPoint = GeoPoint(location!!.latitude, location.longitude)
+                Log.d(TAG, "onComplete: Latitude" + geoPoint.latitude)
+                Log.d(TAG, "onComplete: Longitude" + geoPoint.longitude)
+
+            }
+        }
     }
 
     private fun buildAlertMessageNoGps() {
@@ -106,6 +132,7 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
             == PackageManager.PERMISSION_GRANTED
         ) {
             mLocationPermissionGranted = true
+            getLastKnownLocation()
             getMainFragment()
         } else {
             val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -140,6 +167,7 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
         if (requestCode == PERMISSIONS_REQUEST_ENABLE_GPS) {
             if (mLocationPermissionGranted) {
                 getMainFragment()
+                getLastKnownLocation()
             } else {
                 getLocationPermission()
             }
@@ -151,6 +179,7 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getMainFragment()
+                getLastKnownLocation()
             } else {
                 getLocationPermission()
             }
