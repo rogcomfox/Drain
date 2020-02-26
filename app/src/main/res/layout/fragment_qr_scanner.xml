@@ -31,30 +31,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <View
+        <RelativeLayout
             android:id="@+id/scan"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:background="@drawable/rectangle_border" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_take"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="@color/colorAccent"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/scan_lagi"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:background="@drawable/rectangle_border">
+            <TextView
+                android:id="@+id/tv_flash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/roboto"
+                android:text="Tap To Turn On Flash"
+                android:textSize="12sp"/>
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
