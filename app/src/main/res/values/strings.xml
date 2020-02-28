@@ -9,4 +9,7 @@
     <string name="tentang_flow">Tentang Flow</string>
     <string name="scan_lagi">Scan Lagi</string>
     <string name="pengaturan">Pengaturan</string>
+    <string name="indikasi_bahaya">Indikasi Bahaya</string>
+    <string name="kunjungi_alat">Kunjungi Alat</string>
+    <string name="aman">Aman</string>
 </resources>
