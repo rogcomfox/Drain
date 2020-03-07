@@ -53,4 +53,5 @@ dependencies {
     implementation 'com.google.maps:google-maps-services:0.11.0'
     implementation 'com.otaliastudios:cameraview:2.6.1'
     implementation 'com.google.maps.android:android-maps-utils:0.6.2'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
 }
