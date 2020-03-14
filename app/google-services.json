@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "77615490834",
+    "firebase_url": "https://flow-69fc6.firebaseio.com",
+    "project_id": "flow-69fc6",
+    "storage_bucket": "flow-69fc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77615490834:android:ae0b87e6490ce751ecf5cb",
+        "android_client_info": {
+          "package_name": "com.nusantarian.flow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77615490834-flt43v3tjaq0l9esjrmrvbpt5eupe37o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nusantarian.flow",
+            "certificate_hash": "7759252f0bfb547ff3f0d928558c18a9539aa872"
+          }
+        },
+        {
+          "client_id": "77615490834-m9pp1eruu7c4bf1vh5932f3offd8ebge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQPsn3Rs6NHYAu44ISuUX0c338cJ7wsiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77615490834-m9pp1eruu7c4bf1vh5932f3offd8ebge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
